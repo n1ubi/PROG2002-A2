@@ -1,0 +1,371 @@
+/* 
+   ============================================================
+   PROG2002 A2 - Charity Events Website - Global Styles
+   ============================================================ 
+*/
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+  background: #f4f7f5;
+  color: #22302a;
+  line-height: 1.6;
+}
+
+/* ---------- Navigation (present on all pages) ---------- */
+nav {
+  background: #0d5c3f;
+  color: #fff;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+nav .brand {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  padding: 14px 0;
+}
+
+nav .brand span {
+  color: #ffd479;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 8px;
+}
+
+nav ul li a {
+  display: block;
+  color: #fff;
+  text-decoration: none;
+  padding: 14px 16px;
+  border-radius: 6px 6px 0 0;
+  font-weight: 600;
+}
+
+nav ul li a:hover {
+  background: #0a4a34;
+}
+
+nav ul li a.active {
+  background: #e8a33d;
+  color: #fff;
+}
+
+/* ---------- Layout helpers ---------- */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px 24px;
+}
+
+.page-title {
+  font-size: 26px;
+  color: #0d5c3f;
+  margin-bottom: 6px;
+}
+
+.page-subtitle {
+  color: #5a6f64;
+  margin-bottom: 24px;
+}
+
+/* ---------- Hero (home page) ---------- */
+.hero {
+  background: linear-gradient(135deg, #0d5c3f, #176b4c);
+  color: #fff;
+  padding: 48px 24px;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 34px;
+  margin-bottom: 12px;
+}
+
+.hero p {
+  font-size: 17px;
+  max-width: 700px;
+  margin: 0 auto 10px;
+  color: #e7f2ec;
+}
+
+.hero .mission {
+  font-style: italic;
+  font-size: 16px;
+  color: #ffd479;
+}
+
+.hero .contact {
+  margin-top: 18px;
+  font-size: 14px;
+  color: #cfe3d8;
+}
+
+/* ---------- Cards (event listings) ---------- */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 18px;
+  margin-top: 16px;
+}
+
+.event-card {
+  background: #fff;
+  border: 1px solid #dce8e1;
+  border-radius: 10px;
+  padding: 18px;
+  box-shadow: 0 2px 6px rgba(13, 92, 63, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.event-card .category-tag {
+  align-self: flex-start;
+  background: #e8f3ee;
+  color: #0d5c3f;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+
+.event-card h3 {
+  font-size: 18px;
+  color: #14352a;
+}
+
+.event-card .meta {
+  font-size: 13px;
+  color: #5a6f64;
+}
+
+.event-card .price {
+  font-weight: 700;
+  color: #e8a33d;
+  font-size: 15px;
+}
+
+.event-card .btn {
+  margin-top: auto;
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-block;
+  background: #0d5c3f;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 18px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+}
+
+.btn:hover {
+  background: #0a4a34;
+}
+
+.btn-warm {
+  background: #e8a33d;
+}
+
+.btn-warm:hover {
+  background: #d18f2a;
+}
+
+.btn-ghost {
+  background: #fff;
+  color: #0d5c3f;
+  border: 1px solid #0d5c3f;
+}
+
+.btn-ghost:hover {
+  background: #eef6f1;
+}
+
+/* ---------- Forms (search page) ---------- */
+.filter-form {
+  background: #fff;
+  border: 1px solid #dce8e1;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  align-items: flex-end;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 160px;
+  flex: 1;
+}
+
+.form-group label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #43584e;
+}
+
+.form-group input,
+.form-group select {
+  padding: 9px 10px;
+  border: 1px solid #c5d6cd;
+  border-radius: 6px;
+  font-size: 14px;
+  background: #fff;
+}
+
+.form-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+/* ---------- Messages ---------- */
+.error-box {
+  background: #fdecec;
+  color: #b3382f;
+  border: 1px solid #f2c4c0;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  font-size: 14px;
+}
+
+.info-box {
+  background: #eef6f1;
+  color: #0d5c3f;
+  border: 1px solid #cfe3d8;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  font-size: 14px;
+}
+
+/* ---------- Event detail page ---------- */
+.detail-card {
+  background: #fff;
+  border: 1px solid #dce8e1;
+  border-radius: 12px;
+  padding: 28px;
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+.detail-card h2 {
+  font-size: 28px;
+  color: #0d5c3f;
+  margin-bottom: 4px;
+}
+
+.detail-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  font-size: 14px;
+  color: #43584e;
+  margin: 14px 0;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #e6efe9;
+}
+
+.detail-meta strong {
+  color: #22302a;
+}
+
+.detail-card .description {
+  margin: 16px 0;
+  font-size: 15px;
+}
+
+.goal-progress {
+  background: #eef6f1;
+  border-radius: 8px;
+  padding: 14px 16px;
+  margin: 16px 0;
+}
+
+.goal-progress .bar {
+  background: #cfe3d8;
+  border-radius: 10px;
+  height: 12px;
+  margin: 8px 0;
+  overflow: hidden;
+}
+
+.goal-progress .bar-fill {
+  background: #0d5c3f;
+  height: 100%;
+  width: 0%;
+}
+
+.goal-progress .labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: #43584e;
+}
+
+.register-box {
+  background: #fff8ec;
+  border: 1px solid #f0ddb4;
+  border-radius: 8px;
+  padding: 16px;
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.register-box .price {
+  font-size: 18px;
+  font-weight: 700;
+  color: #8a4f1c;
+}
+
+/* ---------- Footer ---------- */
+footer {
+  text-align: center;
+  padding: 22px;
+  color: #6a7f74;
+  font-size: 13px;
+  background: #e8efe9;
+  margin-top: 40px;
+}
+
+/* ---------- Small screens ---------- */
+@media (max-width: 600px) {
+  nav {
+    flex-direction: column;
+    text-align: center;
+    padding: 12px;
+  }
+  nav ul li a {
+    padding: 10px 12px;
+  }
+  .hero h1 {
+    font-size: 26px;
+  }
+}
