@@ -1,0 +1,96 @@
+/*
+ * event.js
+ * Event detail page: reads the event id from the URL query string,
+ * fetches the full details from the API, and renders them.
+*/
+
+const API_BASE = 'http://localhost:3000/api';
+
+/*
+ * 1. Read the event id passed via the URL
+*/
+function getEventId() {
+  const params = new URLSearchParams(window.location.search);
+  return params.get('id');
+}
+
+/*
+ * 2. Fetch and render the event details
+*/
+async function loadEvent() {
+  const container = document.getElementById('event-detail');
+  const id = getEventId();
+
+  if (!id) {
+    container.innerHTML =
+      '<div class="error-box">No event selected. Go back to the <a href="index.html">home page</a> and choose an event.</div>';
+    return;
+  }
+
+  try {
+    // Fetch the single event from the API
+    const response = await fetch(API_BASE + '/events/' + id);
+    if (response.status === 404) {
+      container.innerHTML = '<div class="error-box">Event not found. It may have been removed.</div>';
+      return;
+    }
+    if (!response.ok) throw new Error('Server returned ' + response.status);
+
+    const e = await response.json();
+
+    // Render the full details
+    const priceText = e.ticket_price == 0 ? 'Free entry' : '$' + e.ticket_price;
+    // Goal vs Progress - for this assessment we show the goal amount
+    // (real progress tracking is added in Assessment 3)
+    const goalText = e.goal_amount != null ? '$' + Number(e.goal_amount).toLocaleString() : 'Not announced';
+
+    container.innerHTML = `
+      <article class="detail-card">
+        <span class="category-tag">${escapeHtml(e.category_name)}</span>
+        <h2>${escapeHtml(e.event_name)}</h2>
+        <p class="meta">Hosted by ${escapeHtml(e.org_name)}</p>
+
+        <div class="detail-meta">
+          <p><strong>Date:</strong> ${e.event_date}</p>
+          <p><strong>Time:</strong> ${e.event_time ? e.event_time.slice(0, 5) : 'To be announced'}</p>
+          <p><strong>Location:</strong> ${escapeHtml(e.location)}, ${escapeHtml(e.district)}</p>
+          <p><strong>Status:</strong> ${e.status === 'past' ? 'Past event' : 'Upcoming'}</p>
+        </div>
+
+        <p class="description">${escapeHtml(e.event_description)}</p>
+
+        <div class="goal-progress">
+          <p><strong>Fundraising Goal:</strong> ${goalText}</p>
+          <div class="bar"><div class="bar-fill"></div></div>
+          <div class="labels"><span>Goal</span><span>Progress tracking coming soon</span></div>
+        </div>
+
+        <div class="register-box">
+          <span class="price">${priceText}</span>
+          <button class="btn btn-warm" id="register-btn">Register for this event</button>
+        </div>
+      </article>
+    `;
+
+    // 3. Wire up the Register button - shows a placeholder message for this assessment
+    document.getElementById('register-btn').addEventListener('click', function () {
+      alert('This feature is currently under construction.');
+    });
+  } catch (err) {
+    container.innerHTML =
+      '<div class="error-box">Could not load the event: ' + escapeHtml(err.message) + '. Is the API server running?</div>';
+  }
+}
+
+// Prevent XSS when inserting API data into the page
+function escapeHtml(text) {
+  if (text === null || text === undefined) return '';
+  return String(text)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+// Run when the page loads
+loadEvent();

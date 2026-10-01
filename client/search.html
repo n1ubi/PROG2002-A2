@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search Events | CityCare Events</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Navigation - present on all pages -->
+  <nav>
+    <div class="brand">CityCare <span>Events</span></div>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="search.html" class="active">Search Events</a></li>
+    </ul>
+  </nav>
+
+  <main class="container">
+    <h2 class="page-title">Search Charity Events</h2>
+    <p class="page-subtitle">Filter events by date, location and category. Leave a field empty to ignore it.</p>
+
+    <!-- Filter form -->
+    <form class="filter-form" id="search-form">
+      <div class="form-group">
+        <label for="date">Date</label>
+        <input type="text" id="date" name="date" placeholder="YYYY-MM-DD">
+      </div>
+      <div class="form-group">
+        <label for="location">Location / District</label>
+        <input type="text" id="location" name="location" placeholder="e.g. Yufeng">
+      </div>
+      <div class="form-group">
+        <label for="category">Category</label>
+        <select id="category" name="category">
+          <option value="">All categories</option>
+          <!-- categories are loaded from the API -->
+        </select>
+      </div>
+    </form>
+
+    <div class="form-actions">
+      <button class="btn" id="search-btn" type="button">Search</button>
+      <button class="btn btn-ghost" id="clear-btn" type="button">Clear Filters</button>
+    </div>
+
+    <!-- Error / status messages -->
+    <div id="message"></div>
+
+    <!-- Search results -->
+    <div id="results" class="card-grid"></div>
+  </main>
+
+  <footer>&copy; 2026 GreatLove Organization. All rights reserved.</footer>
+
+  <script src="js/search.js"></script>
+</body>
+</html>

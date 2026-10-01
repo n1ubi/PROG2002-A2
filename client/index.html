@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GreatLove | Charity Events in Your City</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Navigation - present on all pages -->
+  <nav>
+    <div class="brand">GreatLove <span>Events</span></div>
+    <ul>
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="search.html">Search Events</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero - static information about the organisation -->
+  <header class="hero">
+    <h1>Little things, great love</h1>
+    <p class="mission">"Concentrating on transparent and reliable charitable activities"</p>
+    <p>Liuzhou Community Care is a local non-profit supporting families in need and youth development.</p>
+    <p class="contact">Email: 2077330636@qq.com &nbsp;|&nbsp; Phone: 176 9188 8888</p>
+  </header>
+
+  <main class="container">
+    <h2 class="page-title">Upcoming Charity Events</h2>
+    <p class="page-subtitle">Browse the events below and click one to see full details.</p>
+
+    <!-- Dynamic event list, rendered from the API -->
+    <div id="event-list" class="card-grid">
+      <p class="info-box">Loading events…</p>
+    </div>
+  </main>
+
+  <footer>&copy; 2026 GreatLove Organization. All rights reserved.<br /> <br /> &copy; Lonnie </footer>
+
+  <script src="js/index.js"></script>
+</body>
+</html>
