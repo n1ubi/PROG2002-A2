@@ -1,4 +1,4 @@
-/* 
+/*
  * server.js
  * PROG2002 A2 Part 2 - RESTful API for the charity events website
  * Node.js + Express, retrieves data from MySQL via the event_db.js connection pool
@@ -11,13 +11,15 @@ const db = require('../db/event_db.js');
 const app = express();
 const PORT = 3000;
 
-// Middleware: allow the client-side website (different port) to call this API
+/*
+ * Middleware: allow the client-side website to call this API
+*/
 app.use(cors());
 app.use(express.json());
 
 /*
- *Base SELECT with joins so every response includes the category and organisation names
- * and a computed 'status' field (past / upcoming) based on the current date
+ * Base SELECT with joins so every response includes the category and organisation names
+ * and a computed 'status' field based on the current date
 */
 const BASE_SELECT = `
   SELECT
@@ -29,6 +31,7 @@ const BASE_SELECT = `
     e.location,
     e.district,
     e.goal_amount,
+    e.progress_percent,
     e.ticket_price,
     e.image_url,
     e.category_id,
@@ -45,7 +48,7 @@ const BASE_SELECT = `
  * GET /api/events
  * List events for the home page, with optional search filters
  * (date, location, category) used by the search page.
- * Uses parameterised queries (?) to prevent SQL injection.
+ * Uses parameterised queries to prevent SQL injection.
 */
 app.get('/api/events', async (req, res) => {
   try {
@@ -59,7 +62,9 @@ app.get('/api/events', async (req, res) => {
       params.push(date);
     }
     if (location) {
-      // match against either the venue name or the district
+/*
+ * match against either the venue name or the district
+*/
       sql += ' AND (e.location LIKE ? OR e.district LIKE ?)';
       params.push('%' + location + '%', '%' + location + '%');
     }
@@ -116,7 +121,9 @@ app.get('/api/categories', async (req, res) => {
   }
 });
 
-// Start the server
+/*
+ * Start the server
+*/
 app.listen(PORT, () => {
   console.log(`API server running at http://localhost:${PORT}`);
 });

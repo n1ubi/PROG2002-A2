@@ -16,7 +16,9 @@ async function loadCategories() {
     if (!response.ok) throw new Error('Server returned ' + response.status);
     const categories = await response.json();
 
-    // Build one <option> per category using DOM manipulation
+/*
+ * Build one <option> per category using DOM manipulation
+*/
     categories.forEach(function (c) {
       const option = document.createElement('option');
       option.value = c.category_id;
@@ -38,25 +40,33 @@ async function searchEvents() {
   message.innerHTML = '';
   results.innerHTML = '';
 
-  // Read the form values
+/*
+ * Read the form values
+*/
   const date = document.getElementById('date').value.trim();
   const location = document.getElementById('location').value.trim();
   const category = document.getElementById('category').value;
 
-  // Validate the date format (YYYY-MM-DD) before sending it to the API
+/*
+ * Validate the date format (YYYY-MM-DD) before sending it to the API
+*/
   if (date && !/^\d{4}-\d{2}-\d{2}$/.test(date)) {
     message.innerHTML =
       '<div class="error-box">Please enter the date in YYYY-MM-DD format (e.g. 2026-10-18).</div>';
     return;
   }
 
-  // Build the query string - only include filled-in criteria
+/*
+ * Build the query string - only include filled-in criteria
+*/
   const params = new URLSearchParams();
   if (date) params.append('date', date);
   if (location) params.append('location', location);
   if (category) params.append('category', category);
 
-  // Validate: at least one criterion must be selected
+/*
+ * Validate: at least one criterion must be selected
+*/
   if (params.toString() === '') {
     message.innerHTML =
       '<div class="error-box">Please select at least one filter (date, location or category).</div>';
@@ -64,7 +74,9 @@ async function searchEvents() {
   }
 
   try {
-    // Call the API endpoint with the query string
+/*
+ * Call the API endpoint with the query string
+*/
     const response = await fetch(API_BASE + '/events?' + params.toString());
     if (!response.ok) throw new Error('Server returned ' + response.status);
     const events = await response.json();
@@ -74,7 +86,9 @@ async function searchEvents() {
       return;
     }
 
-    // Render the matching events
+/*
+ * Render the matching events
+*/
     let html = '';
     events.forEach(function (e) {
       html += `
@@ -105,7 +119,9 @@ function clearFilters() {
   document.getElementById('results').innerHTML = '';
 }
 
-// Prevent XSS when inserting API data into the page
+/*
+ * Prevent XSS when inserting API data into the page
+*/
 function escapeHtml(text) {
   if (text === null || text === undefined) return '';
   return String(text)
@@ -115,7 +131,9 @@ function escapeHtml(text) {
     .replace(/"/g, '&quot;');
 }
 
-// Wire up the buttons and load the categories on page load
+/*
+ * Wire up the buttons and load the categories on page load
+*/
 document.getElementById('search-btn').addEventListener('click', searchEvents);
 document.getElementById('clear-btn').addEventListener('click', clearFilters);
 loadCategories();

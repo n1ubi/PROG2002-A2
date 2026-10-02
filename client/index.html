@@ -21,11 +21,18 @@
   <header class="hero">
     <h1>Little things, great love</h1>
     <p class="mission">"Concentrating on transparent and reliable charitable activities"</p>
-    <p>Liuzhou Community Care is a local non-profit supporting families in need and youth development.</p>
+    <p>Love makes the city a better place.</p>
     <p class="contact">Email: 2077330636@qq.com &nbsp;|&nbsp; Phone: 176 9188 8888</p>
   </header>
 
   <main class="container">
+    <!-- Ongoing events, rendered from the API -->
+    <section class="ongoing-section">
+      <h2 class="page-title">Ongoing Charity Events</h2>
+      <p class="page-subtitle">Fundraising is in progress — help us reach the goal.</p>
+      <div id="event-list-ongoing" class="card-grid"></div>
+    </section>
+
     <h2 class="page-title">Upcoming Charity Events</h2>
     <p class="page-subtitle">Browse the events below and click one to see full details.</p>
 
@@ -33,6 +40,13 @@
     <div id="event-list" class="card-grid">
       <p class="info-box">Loading events…</p>
     </div>
+
+    <!-- Past events, rendered from the API -->
+    <section class="past-section">
+      <h2 class="page-title">Completed Charity Events</h2>
+      <p class="page-subtitle">Events we have already held — thank you to everyone who joined.</p>
+      <div id="event-list-past" class="card-grid past-grid"></div>
+    </section>
   </main>
 
   <footer>&copy; 2026 GreatLove Organization. All rights reserved.<br /> <br /> &copy; Lonnie </footer>

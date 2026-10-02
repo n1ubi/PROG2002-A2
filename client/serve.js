@@ -1,7 +1,7 @@
 /*
  * serve.js
- * Simple static file server for the client-side website (no dependencies).
- * Run: node serve.js  ->  website available at http://localhost:8080
+ * Simple static file server for the client-side website.
+ * Run: node serve.js  -- website available at http://localhost:8080
 */
 
 const http = require('http');
@@ -11,7 +11,9 @@ const path = require('path');
 const PORT = 8080;
 const ROOT = __dirname;
 
-// Map file extensions to content types
+/*
+ * Map file extensions to content types
+*/
 const MIME = {
   '.html': 'text/html; charset=utf-8',
   '.css': 'text/css; charset=utf-8',
@@ -23,11 +25,15 @@ const MIME = {
 };
 
 http.createServer((req, res) => {
-  // Map the request URL to a file inside the client folder
+/*
+ * Map the request URL to a file inside the client folder
+*/
   let urlPath = decodeURIComponent(req.url.split('?')[0]);
   if (urlPath === '/') urlPath = '/index.html';
 
-  // Resolve and make sure the file stays inside the client folder (no path traversal)
+/*
+ * Resolve and make sure the file stays inside the client folder (no path traversal)
+*/
   const filePath = path.resolve(ROOT, '.' + urlPath);
   if (!filePath.startsWith(path.resolve(ROOT))) {
     res.writeHead(403, { 'Content-Type': 'text/plain; charset=utf-8' });

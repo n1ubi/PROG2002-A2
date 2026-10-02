@@ -28,7 +28,9 @@ async function loadEvent() {
   }
 
   try {
-    // Fetch the single event from the API
+/*
+ * Fetch the single event from the API
+*/
     const response = await fetch(API_BASE + '/events/' + id);
     if (response.status === 404) {
       container.innerHTML = '<div class="error-box">Event not found. It may have been removed.</div>';
@@ -38,11 +40,24 @@ async function loadEvent() {
 
     const e = await response.json();
 
-    // Render the full details
+/*
+ * Render the full details
+*/
     const priceText = e.ticket_price == 0 ? 'Free entry' : '$' + e.ticket_price;
-    // Goal vs Progress - for this assessment we show the goal amount
-    // (real progress tracking is added in Assessment 3)
+/*
+ * Goal vs Progress
+*/
     const goalText = e.goal_amount != null ? '$' + Number(e.goal_amount).toLocaleString() : 'Not announced';
+/*
+ * Fundraising progress
+*/
+    const progress = Math.min(Number(e.progress_percent) || 0, 100);
+    const statusText = e.status === 'past'
+      ? 'Past event'
+      : (progress > 0 ? 'Fundraising in progress' : 'Upcoming');
+    const progressLabel = e.status === 'past'
+      ? '100% funded — completed'
+      : progress + '% funded';
 
     container.innerHTML = `
       <article class="detail-card">
@@ -54,15 +69,15 @@ async function loadEvent() {
           <p><strong>Date:</strong> ${e.event_date}</p>
           <p><strong>Time:</strong> ${e.event_time ? e.event_time.slice(0, 5) : 'To be announced'}</p>
           <p><strong>Location:</strong> ${escapeHtml(e.location)}, ${escapeHtml(e.district)}</p>
-          <p><strong>Status:</strong> ${e.status === 'past' ? 'Past event' : 'Upcoming'}</p>
+          <p><strong>Status:</strong> ${statusText}</p>
         </div>
 
         <p class="description">${escapeHtml(e.event_description)}</p>
 
         <div class="goal-progress">
           <p><strong>Fundraising Goal:</strong> ${goalText}</p>
-          <div class="bar"><div class="bar-fill"></div></div>
-          <div class="labels"><span>Goal</span><span>Progress tracking coming soon</span></div>
+          <div class="bar"><div class="bar-fill" style="width:${progress}%"></div></div>
+          <div class="labels"><span>Goal</span><span>${progressLabel}</span></div>
         </div>
 
         <div class="register-box">
@@ -72,7 +87,9 @@ async function loadEvent() {
       </article>
     `;
 
-    // 3. Wire up the Register button - shows a placeholder message for this assessment
+/*
+ * 3. Wire up the Register button - shows a placeholder message for this assessment
+*/
     document.getElementById('register-btn').addEventListener('click', function () {
       alert('This feature is currently under construction.');
     });
@@ -82,7 +99,9 @@ async function loadEvent() {
   }
 }
 
-// Prevent XSS when inserting API data into the page
+/*
+ * Prevent XSS when inserting API data into the page
+*/
 function escapeHtml(text) {
   if (text === null || text === undefined) return '';
   return String(text)
@@ -92,5 +111,7 @@ function escapeHtml(text) {
     .replace(/"/g, '&quot;');
 }
 
-// Run when the page loads
+/*
+ * Run when the page loads
+*/
 loadEvent();

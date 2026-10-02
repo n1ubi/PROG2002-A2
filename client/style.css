@@ -162,6 +162,60 @@ nav ul li a.active {
   margin-top: auto;
 }
 
+/* ---------- Past events section (home page) ---------- */
+.past-section {
+  margin-top: 44px;
+}
+
+.past-grid .event-card {
+  background: #f7faf8;
+  border-color: #e0e9e3;
+  box-shadow: none;
+}
+
+.past-grid .event-card h3 {
+  color: #4c5f55;
+}
+
+.past-grid .event-card .category-tag {
+  background: #e8eeea;
+  color: #5a6f64;
+}
+
+/* ---------- Ongoing events section (home page) ---------- */
+.ongoing-section {
+  margin-bottom: 44px;
+}
+
+/* ---------- Fundraising progress bars on cards ---------- */
+.card-progress {
+  margin-top: 4px;
+}
+
+.progress-bar {
+  background: #e6efe9;
+  border-radius: 8px;
+  height: 10px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  background: #0d5c3f;
+  height: 100%;
+  width: 0;
+}
+
+.ongoing-section .progress-fill {
+  background: #e8a33d;
+}
+
+.progress-label {
+  display: inline-block;
+  margin-top: 4px;
+  font-size: 12px;
+  color: #5a6f64;
+}
+
 /* ---------- Buttons ---------- */
 .btn {
   display: inline-block;
