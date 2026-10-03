@@ -93,6 +93,7 @@ async function searchEvents() {
     events.forEach(function (e) {
       html += `
         <article class="event-card">
+          <img class="event-card-img" src="${escapeHtml(e.image_url)}" alt="${escapeHtml(e.event_name)}" onerror="this.style.display='none'">
           <span class="category-tag">${escapeHtml(e.category_name)}</span>
           <h3>${escapeHtml(e.event_name)}</h3>
           <p class="meta">📅 ${e.event_date} ${e.event_time ? 'at ' + e.event_time.slice(0, 5) : ''}</p>

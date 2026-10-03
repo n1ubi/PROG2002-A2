@@ -58,9 +58,16 @@ async function loadEvent() {
     const progressLabel = e.status === 'past'
       ? '100% funded — completed'
       : progress + '% funded';
+/*
+ * Register button: completed events show a greyed-out disabled button
+*/
+    const registerBtnHtml = e.status === 'past'
+      ? '<button class="btn btn-warm" id="register-btn" disabled>Event Completed</button>'
+      : '<button class="btn btn-warm" id="register-btn">Register for this event</button>';
 
     container.innerHTML = `
       <article class="detail-card">
+        <img class="detail-img" src="${escapeHtml(e.image_url)}" alt="${escapeHtml(e.event_name)}" onerror="this.style.display='none'">
         <span class="category-tag">${escapeHtml(e.category_name)}</span>
         <h2>${escapeHtml(e.event_name)}</h2>
         <p class="meta">Hosted by ${escapeHtml(e.org_name)}</p>
@@ -82,17 +89,21 @@ async function loadEvent() {
 
         <div class="register-box">
           <span class="price">${priceText}</span>
-          <button class="btn btn-warm" id="register-btn">Register for this event</button>
+          ${registerBtnHtml}
         </div>
       </article>
     `;
 
 /*
- * 3. Wire up the Register button - shows a placeholder message for this assessment
+ * 3. Wire up the Register button - shows a placeholder message for this
+ *    assessment. Completed events have a disabled button, so no handler.
 */
-    document.getElementById('register-btn').addEventListener('click', function () {
-      alert('This feature is currently under construction.');
-    });
+    const registerBtn = document.getElementById('register-btn');
+    if (registerBtn && !registerBtn.disabled) {
+      registerBtn.addEventListener('click', function () {
+        alert('This feature is currently under construction.');
+      });
+    }
   } catch (err) {
     container.innerHTML =
       '<div class="error-box">Could not load the event: ' + escapeHtml(err.message) + '. Is the API server running?</div>';
