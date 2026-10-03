@@ -32,7 +32,7 @@ http.createServer((req, res) => {
   if (urlPath === '/') urlPath = '/index.html';
 
 /*
- * Resolve and make sure the file stays inside the client folder (no path traversal)
+ * Resolve and make sure the file stays inside the client folder
 */
   const filePath = path.resolve(ROOT, '.' + urlPath);
   if (!filePath.startsWith(path.resolve(ROOT))) {

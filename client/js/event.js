@@ -63,7 +63,7 @@ async function loadEvent() {
 */
     const registerBtnHtml = e.status === 'past'
       ? '<button class="btn btn-warm" id="register-btn" disabled>Event Completed</button>'
-      : '<button class="btn btn-warm" id="register-btn">Register for this event</button>';
+      : '<button class="btn btn-warm" id="register-btn">&#9829; Register for this event</button>';
 
     container.innerHTML = `
       <article class="detail-card">
